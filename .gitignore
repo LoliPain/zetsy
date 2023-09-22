@@ -4,3 +4,6 @@
 
 # exclude .lock
 poetry.lock
+
+# sensetive django data
+server/db.sqlite3
