@@ -11,6 +11,7 @@ steps:
   image: python:3.10.1
   commands:
   - pip install poetry
+  - poetry config virtualenvs.create false
   - poetry install
   - python3 -m mypy .
 
