@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "zetsy"
+version = "0.0.1"
+description = "Beauty Django backend for ShareX custom uploader"
+authors = ["LoliPain <p2love.loli@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+Django = "^4.2.5"
+gunicorn = "^21.2.0"
+python-decouple = "^3.8"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
