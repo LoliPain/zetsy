@@ -1,3 +1,9 @@
 
 # pep 3147
 **/__pycache__/*.pyc
+
+# exclude .lock
+poetry.lock
+
+# sensetive django data
+server/db.sqlite3

@@ -1,0 +1,31 @@
+[tool.poetry]
+name = "zetsy"
+version = "0.0.1"
+description = "Beauty Django backend for ShareX custom uploader"
+authors = ["LoliPain <p2love.loli@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+Django = "^4.2.5"
+gunicorn = "^21.2.0"
+python-decouple = "^3.8"
+
+
+[tool.poetry.group.dev.dependencies]
+mypy = "^1.5.1"
+django-stubs = "^4.2.4"
+
+
+[tool.mypy]
+exclude = ['venv', '.venv']
+
+[[tool.mypy.overrides]]
+module = 'decouple'
+ignore_missing_imports = true
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
