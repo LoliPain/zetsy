@@ -27,7 +27,6 @@ SECRET_KEY = config("DJANGO_SECRET", default="")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config("DJANGO_DEBUG", default=False)
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -55,7 +54,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            BASE_DIR / 'html_django'
+            BASE_DIR / 'django_templates'
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -93,6 +92,9 @@ LANGUAGE_CODE = 'en-us'
 
 STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / 'build' / 'static'
+STATICFILES_DIRS = [
+    BASE_DIR / 'static'
+]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
