@@ -24,4 +24,4 @@ urlpatterns = [
     path("", IndexView.as_view(), name='Index'),
 ]
 
-urlpatterns.extend(static(settings.STATIC_URL, document_root=settings.STATIC_ROOT))
+urlpatterns.extend(static(settings.STATIC_URL))
