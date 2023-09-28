@@ -11,16 +11,18 @@ python = "^3.10"
 Django = "^4.2.5"
 gunicorn = "^21.2.0"
 python-decouple = "^3.8"
+djangorestframework = "^3.14.0"
 
 
 [tool.poetry.group.dev.dependencies]
 mypy = "^1.5.1"
 django-stubs = "^4.2.4"
+djangorestframework-stubs = "^3.14.2"
 
 
 [tool.mypy]
 exclude = ['venv', '.venv']
-plugins = ["mypy_django_plugin.main"]
+plugins = ["mypy_django_plugin.main", "mypy_drf_plugin.main"]
 
 [[tool.mypy.overrides]]
 module = 'decouple'
