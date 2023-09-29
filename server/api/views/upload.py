@@ -1,8 +1,9 @@
-from typing import OrderedDict, Type, Union
+from typing import OrderedDict, Type, Any
 
 from rest_framework.generics import CreateAPIView
 from rest_framework.serializers import Serializer, FileField, BaseSerializer
-from django.core.files.uploadedfile import InMemoryUploadedFile
+from rest_framework.request import Request
+from rest_framework.response import Response
 
 
 class GenericFileSerializer(Serializer):
@@ -15,12 +16,18 @@ class PhotoSerializer(GenericFileSerializer):
 
 
 class UploadFileView(CreateAPIView):
-    def get_serializer_class(self) -> Type[BaseSerializer]:
-        attachment: Union[InMemoryUploadedFile, None] = self.request.data.get('attachment')
-        if not attachment:
-            return Serializer
+    def __init__(self, **kwargs: Any):
+        super().__init__(**kwargs)
+        self.attachment = None
 
-        match attachment.content_type.split('/')[0]:
+    def post(self, request: Request, *args: Any, **kwargs: Any) -> Response:
+        self.attachment = self.request.data.get('attachment')
+        if self.attachment:
+            return Response('n')
+        return super().post(request, *args, **kwargs)
+
+    def get_serializer_class(self) -> Type[BaseSerializer]:
+        match self.attachment.content_type.split('/')[0]:
             case 'image':
                 return PhotoSerializer
             case _:
