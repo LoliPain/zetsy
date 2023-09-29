@@ -22,7 +22,7 @@ class UploadFileView(CreateAPIView):
 
     def post(self, request: Request, *args: Any, **kwargs: Any) -> Response:
         self.attachment = self.request.data.get('attachment')
-        if self.attachment:
+        if not self.attachment:
             return Response('n')
         return super().post(request, *args, **kwargs)
 
