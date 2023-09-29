@@ -27,6 +27,8 @@ class UploadFileView(CreateAPIView):
         return super().post(request, *args, **kwargs)
 
     def get_serializer_class(self) -> Type[BaseSerializer]:
+        if not self.attachment:
+            return Serializer
         match self.attachment.content_type.split('/')[0]:
             case 'image':
                 return PhotoSerializer
