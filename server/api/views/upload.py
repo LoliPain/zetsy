@@ -15,7 +15,7 @@ class PhotoSerializer(ModelSerializer):
         fields = ("attachment",)
 
     def create(self, ctx: OrderedDict):
-        return FileModel(attachment=ctx['attachment'])
+        return FileModel(**ctx)
 
 
 class UploadFileView(CreateAPIView):
