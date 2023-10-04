@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'server.api',
     'server.core',
-    'server'
+    'server.models'
 ]
 
 MIDDLEWARE = [
