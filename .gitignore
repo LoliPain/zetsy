@@ -10,3 +10,4 @@ server/db.sqlite3
 
 # build
 build/*
+server/models/migrations
