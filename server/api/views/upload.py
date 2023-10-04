@@ -11,8 +11,16 @@ class GenericFileSerializer(Serializer):
 
 
 class PhotoSerializer(GenericFileSerializer):
+    class ExampleModel:
+        class File:
+            def __init__(self, url):
+                self.url = url
+
+        def __init__(self, **kwargs):
+            self.attachment = self.File(kwargs.get('_name'))
+
     def create(self, ctx: OrderedDict):
-        ...
+        return self.ExampleModel(**ctx['attachment'].__dict__)
 
 
 class UploadFileView(CreateAPIView):
@@ -23,7 +31,7 @@ class UploadFileView(CreateAPIView):
     def post(self, request: Request, *args: Any, **kwargs: Any) -> Response:
         self.attachment = self.request.data.get('attachment')
         if not self.attachment:
-            return Response('n')
+            return Response('No file provided')
         return super().post(request, *args, **kwargs)
 
     def get_serializer_class(self) -> Type[BaseSerializer]:
