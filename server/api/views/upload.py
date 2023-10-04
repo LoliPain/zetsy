@@ -9,11 +9,13 @@ from rest_framework.parsers import MultiPartParser
 from server.models.stored_file import FileModel
 
 
-class PhotoSerializer(ModelSerializer):
+class GenericFileSerializer(ModelSerializer):
     class Meta:
         model = FileModel
         fields = ("attachment",)
 
+
+class PhotoSerializer(GenericFileSerializer):
     def create(self, ctx: OrderedDict):
         return FileModel(**ctx)
 
