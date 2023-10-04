@@ -1,26 +1,22 @@
 from typing import OrderedDict, Type, Any
 
 from rest_framework.generics import CreateAPIView
-from rest_framework.serializers import Serializer, FileField, BaseSerializer
+from rest_framework.serializers import ModelSerializer, BaseSerializer, Serializer
 from rest_framework.request import Request
 from rest_framework.response import Response
 
+from server.models.stored_file import FileModel
 
-class GenericFileSerializer(Serializer):
-    attachment = FileField()
+
+class GenericFileSerializer(ModelSerializer):
+    class Meta:
+        model = FileModel
+        fields = ("attachment",)
 
 
 class PhotoSerializer(GenericFileSerializer):
-    class ExampleModel:
-        class File:
-            def __init__(self, url):
-                self.url = url
-
-        def __init__(self, **kwargs):
-            self.attachment = self.File(kwargs.get('_name'))
-
     def create(self, ctx: OrderedDict):
-        return self.ExampleModel(**ctx['attachment'].__dict__)
+        return FileModel(attachment=ctx['attachment'].name)
 
 
 class UploadFileView(CreateAPIView):
