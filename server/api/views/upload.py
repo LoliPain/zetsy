@@ -23,6 +23,7 @@ class UploadFileView(GenericAPIView):
     def post(self, request: Request, *args: Any, **kwargs: Any) -> Response:
         serializer = self.get_serializer(data=request.data)
         if serializer.is_valid():
-            return Response(status=HTTP_201_CREATED)
+            return_data = serializer.to_representation(FileModel(**serializer.validated_data))
+            return Response(return_data, status=HTTP_201_CREATED)
 
         return Response(serializer.errors, status=HTTP_400_BAD_REQUEST)
