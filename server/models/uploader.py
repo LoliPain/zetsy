@@ -1,4 +1,4 @@
-from django.db.models import Model, CharField, BooleanField
+from django.db.models import Model, CharField, BooleanField, FileField, TextField
 
 
 class UploaderModel(Model):
@@ -8,3 +8,11 @@ class UploaderModel(Model):
 
 class UploadedByModel(UploaderModel):
     uploader_ip = CharField(max_length=64)
+
+
+class UploadingForm(Model):
+    _token = TextField()
+    attachment = FileField()
+
+
+__all__ = ["UploaderModel", "UploadedByModel", "UploadingForm"]
