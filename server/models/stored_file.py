@@ -1,4 +1,4 @@
-from django.db.models import Model, FileField, CharField, ForeignKey, CASCADE
+from django.db.models import Model, FileField, ForeignKey, CASCADE
 from .uploader import UploadedByModel
 
 

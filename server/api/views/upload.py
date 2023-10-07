@@ -1,7 +1,7 @@
 from typing import OrderedDict, Type, Any
 
-from rest_framework.generics import CreateAPIView
-from rest_framework.serializers import ModelSerializer, BaseSerializer, Serializer
+from rest_framework.generics import GenericAPIView
+from rest_framework.serializers import ModelSerializer, BaseSerializer
 from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework.parsers import MultiPartParser
@@ -20,23 +20,18 @@ class PhotoSerializer(GenericFileSerializer):
         return FileModel(**ctx)
 
 
-class UploadFileView(CreateAPIView):
+class UploadFileView(GenericAPIView):
     parser_classes = (MultiPartParser,)
 
-    def __init__(self, **kwargs: Any):
-        super().__init__(**kwargs)
-        self.attachment = None
-
     def post(self, request: Request, *args: Any, **kwargs: Any) -> Response:
-        self.attachment = self.request.FILES.get('attachment')
-        if not self.attachment:
+        if not self.request.FILES.get('attachment'):
             return Response('No file provided')
-        return super().post(request, *args, **kwargs)
+        # TODO: Use serializer
+        return Response()
 
     def get_serializer_class(self) -> Type[BaseSerializer]:
-        if not self.attachment:
-            return Serializer
-        match self.attachment.content_type.split('/')[0]:
+        _attachment = self.request.FILES.get('attachment')
+        match _attachment.content_type.split('/')[0]:
             case 'image':
                 return PhotoSerializer
             case _:
